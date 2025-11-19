@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include
+// قراءة سلسلة مخصصة ديناميكيًا
+char *LoadString(int N) {
+char *str = malloc((N + 1) * sizeof(char));
+if (!str) { printf("فشل تخصيص الذاكرة!\n"); خروج (1)؛ }
+printf("أدخل سلسلة:");
+fgets(str, N + 1, stdin);
+str[strcspn(str, "\n")] = '\0'; // حذف '\n' إن وُجدت
+return str;
+}
+
+// حساب طول العقد
+int StringLength(char *str) {
+int len ​​= 0;
+بينما (str[len]) len++;
+عودة لين؛
+}
+
+// سلسلة النسخة إلى المصفوفة
+void LoadArray(char *p, char arr[]) {
+int i = 0;
+while ((arr[i] = p[i]) != '\0') i++;
+}
+
+// عكس مصفوفة أحرف
+void ReverseArray(char arr[], char rev[], int n) {
+for (int i = 0; i < n; i++)
+rev[i] = arr[n - i - 1];
+rev[n] = '\0';
+}
+
+// عرض المصفوفة
+void DisplayArray(char arr[], int n) {
+for (int i = 0; i < n; i++) printf("%c", arr[i]);
+printf("\n");
+}
+
+// مجموع قيم ASCII (تكراري)
+int SumStringASCII(char *p) {
+return (*p) ? *p + SumStringASCII(p + 1) : 0;
+}
+
+// عكس السلسلة بالمؤشرات ( التكراري)
+void ReverseString(char *start, char *end) {
+if (start >= end) return;
+درجة الحرارة شار = *بدء؛
+*بداية = *نهاية؛
+*end = temp;
+ReverseString(start + 1, end - 1);
+}
+
+// البرنامج الرئيسي
+int main() {
+int n;
+printf("أدخل الحد الأقصى للحجم:");
+scanf("%d", &n);
+getchar();
+
+char *str = LoadString(n);
+int len = StringLength(str);
+char arr[len + 1], rev[len + 1];
+
+LoadArray(str, arr);
+printf("\nOriginal array: "); DisplayArray(arr, len);
+
+ReverseArray(arr, rev, len);
+printf("Reversed array: "); DisplayArray(rev, len);
+
+printf("Sum of ASCII values: %d\n", SumStringASCII(str));
+
+ReverseString(str, str + len - 1);
+printf("Reversed recursively: %s\n", str);
+
+free(str);
+return 0;
